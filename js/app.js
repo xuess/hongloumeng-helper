@@ -8,6 +8,7 @@
   'use strict';
 
   // ─── State ────────────────────────────────────────────────────────────────
+  const SEARCH_DEBOUNCE_MS = 300;
   let currentTab      = 'graph';
   let graphInited     = false;
   let searchDebounce  = null;
@@ -603,7 +604,7 @@
         clearTimeout(searchDebounce);
         searchDebounce = setTimeout(() => {
           filterCharacters(searchInput.value, activeFamily);
-        }, 300);
+        }, SEARCH_DEBOUNCE_MS);
       });
     }
 

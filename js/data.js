@@ -519,7 +519,7 @@ const CHARACTERS = {
     events: ["魇镇宝玉凤姐", "与探春冲突"],
     fate: "被贾府所遗弃",
     relations: [
-      { name: "贾政", id: "jia_zheng", label: "主人/男友" },
+      { name: "贾政", id: "jia_zheng", label: "主人/姨娘" },
       { name: "探春", id: "tanchun", label: "女儿" }
     ]
   },
