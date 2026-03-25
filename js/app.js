@@ -84,16 +84,18 @@
     const container = document.getElementById('graph-container');
     if (!container) return;
 
-    // Show spinner while graph loads
-    container.innerHTML = '<div class="empty-state"><div class="spinner"></div><p>正在加载关系图谱…</p></div>';
-
     requestAnimationFrame(() => {
       if (window.GraphModule && typeof window.GraphModule.init === 'function') {
-        container.innerHTML = '';
+        // Hide loading overlay; graph.js will insert the SVG
+        const loadingEl = document.getElementById('graph-loading');
+        if (loadingEl) loadingEl.style.display = 'none';
         window.GraphModule.init('graph-container');
         graphInited = true;
       } else {
-        container.innerHTML = '<div class="empty-state"><div class="empty-icon">⚠️</div><p>图谱模块加载失败，请刷新页面</p></div>';
+        const loadingEl = document.getElementById('graph-loading');
+        if (loadingEl) {
+          loadingEl.innerHTML = '<div class="empty-icon">⚠️</div><p>图谱模块加载失败，请刷新页面</p>';
+        }
       }
     });
   }

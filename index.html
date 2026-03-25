@@ -60,7 +60,7 @@
 
     <main id="main-content" aria-label="主内容区域">
 
-      <div id="panel-graph" class="tab-panel active" role="tabpanel" aria-labelledby="tab-graph">
+      <div id="panel-graph" class="tab-panel active" data-panel="graph" role="tabpanel" aria-labelledby="tab-graph">
         <div id="graph-container" aria-label="人物关系图谱">
           <!-- D3 SVG inserted here by JS -->
           <div id="graph-legend" aria-label="图例"><!-- Legend inserted by JS --></div>
@@ -76,7 +76,7 @@
         </div>
       </div>
 
-      <div id="panel-tree" class="tab-panel" role="tabpanel" aria-labelledby="tab-tree">
+      <div id="panel-tree" class="tab-panel" data-panel="tree" role="tabpanel" aria-labelledby="tab-tree">
         <div class="panel-header">
           <h2>🌳 贾府家族族谱</h2>
           <p>贾、史、王、薛四大家族人物关系梳理</p>
@@ -84,7 +84,7 @@
         <div id="family-tree-panel" aria-label="家族族谱"><!-- Rendered by JS --></div>
       </div>
 
-      <div id="panel-list" class="tab-panel" role="tabpanel" aria-labelledby="tab-list">
+      <div id="panel-list" class="tab-panel" data-panel="list" role="tabpanel" aria-labelledby="tab-list">
         <div class="panel-header">
           <h2>📋 人物列表</h2>
           <p>《红楼梦》主要人物一览</p>
@@ -92,7 +92,7 @@
         <div id="char-grid" class="char-grid" aria-label="人物卡片列表"><!-- Rendered by JS --></div>
       </div>
 
-      <div id="panel-reference" class="tab-panel" role="tabpanel" aria-labelledby="tab-reference">
+      <div id="panel-reference" class="tab-panel" data-panel="reference" role="tabpanel" aria-labelledby="tab-reference">
         <div class="panel-header">
           <h2>📚 资料典故</h2>
           <p>经典诗词、大观园风貌、章节导读</p>
