@@ -553,7 +553,8 @@ img, svg { display: block; max-width: 100%; }
 }
 .node circle:hover,
 .node.hovered circle {
-  r: 22;
+  transform: scale(1.35);
+  transform-origin: center;
   stroke-width: 3;
   filter: drop-shadow(0 0 10px currentColor);
 }
@@ -577,11 +578,10 @@ img, svg { display: block; max-width: 100%; }
 }
 .node.selected text { fill: var(--color-accent); }
 
-/* Node label (shown below circle) */
+/* Node sub-label — dy must be set as an SVG attribute in markup/JS, not CSS */
 .node .node-label {
   font-size: 10px;
   fill: var(--color-text-muted);
-  dy: 1em;
 }
 
 /* Tooltip */
