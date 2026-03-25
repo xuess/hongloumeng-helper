@@ -615,14 +615,14 @@ const FAMILIES = {
     color: "#e63946",
     members: [
       "jia_baoyu", "jia_mu", "jia_zheng", "jia_she", "jia_lian",
-      "wang_furen", "xing_furen", "tanchun", "yingchun", "yuanchun",
-      "xiren", "qingwen", "pinger", "zijuan", "zhao_yiniang"
+      "xing_furen", "tanchun", "yingchun", "yuanchun",
+      "xiren", "qingwen", "pinger", "zijuan"
     ]
   },
   jia_ning: {
     name: "贾家宁府",
     color: "#c77dff",
-    members: ["jia_zhen", "jia_rong_son", "qin_keqing", "xichun", "you_shi"]
+    members: ["jia_zhen", "jia_rong_son", "qin_keqing", "xichun"]
   },
   lin: {
     name: "林家",
