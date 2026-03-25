@@ -1,0 +1,53 @@
+# 部署工作流：将静态网页应用发布到 GitHub Pages
+name: 部署到 GitHub Pages
+
+# 触发条件
+on:
+  # 当代码推送到 main 分支时自动触发
+  push:
+    branches:
+      - main
+  # 允许在 GitHub Actions 页面手动触发
+  workflow_dispatch:
+
+# 设置必要的权限
+permissions:
+  contents: read      # 读取仓库内容
+  pages: write        # 写入 GitHub Pages
+  id-token: write     # 用于 OIDC 身份验证
+
+# 并发控制：防止多个部署任务同时运行
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  # 构建任务：打包静态资源并上传为 Pages 构件
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # 检出仓库代码
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      # 将整个仓库内容上传为 GitHub Pages 构件
+      - name: 上传 Pages 构件
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # 上传根目录下的所有文件
+          path: '.'
+
+  # 部署任务：将构件发布到 GitHub Pages
+  deploy:
+    runs-on: ubuntu-latest
+    # 依赖 build 任务完成后再执行
+    needs: build
+    # 指定部署环境，并获取部署地址
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      # 将上传的构件部署到 GitHub Pages
+      - name: 部署到 GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
