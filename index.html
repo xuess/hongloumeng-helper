@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>红楼梦·人物关系图谱</title>
+  <meta name="description" content="《红楼梦》人物关系互动图谱，探索金陵十二钗与贾府人物的错综关系">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=Noto+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="navbar" aria-label="主导航">
+    <div class="nav-brand">
+      <span class="brand-icon">🏮</span>
+      <span class="brand-title">红楼梦·人物关系</span>
+      <span class="brand-subtitle">Dream of the Red Chamber</span>
+    </div>
+    <div class="nav-tabs" role="tablist" aria-label="功能标签页">
+      <button class="nav-tab active" data-tab="graph" role="tab" aria-selected="true" aria-controls="panel-graph">🕸 关系图谱</button>
+      <button class="nav-tab" data-tab="tree" role="tab" aria-selected="false" aria-controls="panel-tree">🌳 家族族谱</button>
+      <button class="nav-tab" data-tab="list" role="tab" aria-selected="false" aria-controls="panel-list">📋 人物列表</button>
+      <button class="nav-tab" data-tab="reference" role="tab" aria-selected="false" aria-controls="panel-reference">📚 资料典故</button>
+    </div>
+    <div class="nav-actions">
+      <button id="sidebar-toggle" title="切换侧边栏" aria-label="切换侧边栏显示">☰</button>
+    </div>
+  </nav>
+
+  <div id="app-container">
+
+    <aside id="sidebar" aria-label="人物搜索与筛选">
+      <div class="sidebar-header">
+        <h3>🔍 人物搜索</h3>
+      </div>
+      <div class="search-container">
+        <input type="text" id="char-search" placeholder="搜索人物姓名..." autocomplete="off" aria-label="搜索人物姓名">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+      </div>
+      <div class="family-filters" aria-label="按家族筛选">
+        <div class="filter-label">按家族筛选：</div>
+        <div id="family-filter-buttons" role="group" aria-label="家族筛选按钮">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+      <div class="sidebar-section">
+        <div class="section-header">
+          <span>人物列表</span>
+          <span id="char-count" class="count-badge" aria-live="polite">0</span>
+        </div>
+        <div id="char-list" class="char-list" role="list" aria-label="人物列表">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </aside>
+
+    <main id="main-content" aria-label="主内容区域">
+
+      <div id="panel-graph" class="tab-panel active" role="tabpanel" aria-labelledby="tab-graph">
+        <div id="graph-container" aria-label="人物关系图谱">
+          <!-- D3 SVG inserted here by JS -->
+          <div id="graph-legend" aria-label="图例"><!-- Legend inserted by JS --></div>
+          <div id="graph-controls" aria-label="图谱缩放控制">
+            <button id="graph-zoom-in" class="graph-control-btn" title="放大" aria-label="放大">+</button>
+            <button id="graph-reset" class="graph-control-btn" title="重置视图" aria-label="重置视图">⊙</button>
+            <button id="graph-zoom-out" class="graph-control-btn" title="缩小" aria-label="缩小">−</button>
+          </div>
+          <div id="graph-loading" class="loading-overlay" role="status" aria-live="polite">
+            <div class="loading-spinner" aria-hidden="true"></div>
+            <p>正在加载人物关系图...</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="panel-tree" class="tab-panel" role="tabpanel" aria-labelledby="tab-tree">
+        <div class="panel-header">
+          <h2>🌳 贾府家族族谱</h2>
+          <p>贾、史、王、薛四大家族人物关系梳理</p>
+        </div>
+        <div id="family-tree-panel" aria-label="家族族谱"><!-- Rendered by JS --></div>
+      </div>
+
+      <div id="panel-list" class="tab-panel" role="tabpanel" aria-labelledby="tab-list">
+        <div class="panel-header">
+          <h2>📋 人物列表</h2>
+          <p>《红楼梦》主要人物一览</p>
+        </div>
+        <div id="char-grid" class="char-grid" aria-label="人物卡片列表"><!-- Rendered by JS --></div>
+      </div>
+
+      <div id="panel-reference" class="tab-panel" role="tabpanel" aria-labelledby="tab-reference">
+        <div class="panel-header">
+          <h2>📚 资料典故</h2>
+          <p>经典诗词、大观园风貌、章节导读</p>
+        </div>
+        <div id="reference-panel" aria-label="资料典故内容"><!-- Rendered by JS --></div>
+      </div>
+
+      <footer aria-label="页脚信息">
+        <p>《红楼梦》人物关系图谱 | 基于曹雪芹原著</p>
+      </footer>
+
+    </main>
+
+    <aside id="detail-panel" aria-label="人物详细信息">
+      <div class="detail-header">
+        <button id="detail-close" class="close-btn panel-close" title="关闭" aria-label="关闭详情面板">✕</button>
+      </div>
+      <div id="detail-content" class="panel-body">
+        <div class="detail-placeholder">
+          <div class="placeholder-icon" aria-hidden="true">👆</div>
+          <p>点击图谱中的人物节点</p>
+          <p>或左侧列表中的人物</p>
+          <p>查看详细信息</p>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="js/graph.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
