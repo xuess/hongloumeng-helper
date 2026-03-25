@@ -428,10 +428,10 @@
         source: '第二十七回·葬花吟'
       },
       {
-        title: '临江仙·开篇词',
-        author: '作者',
-        lines: ['滚滚长江东逝水，浪花淘尽英雄。', '是非成败转头空，青山依旧在，几度夕阳红。', '白发渔樵江渚上，惯看秋月春风。', '一壶浊酒喜相逢，古今多少事，都付笑谈中。'],
-        source: '全书题词'
+        title: '题红楼梦·开篇绝句',
+        author: '曹雪芹',
+        lines: ['满纸荒唐言，一把辛酸泪。', '都云作者痴，谁解其中味？'],
+        source: '第一回·开篇题诗'
       },
       {
         title: '好了歌',
@@ -555,7 +555,7 @@
                 <div class="lore-term" style="margin:0">${esc(b.name)}</div>
                 <div class="text-xs text-muted">${esc(b.pinyin)}</div>
               </div>
-              <span class="chip" style="margin-left:auto;font-size:0.7rem">${esc(i < 6 ? '正册' : '副册')}</span>
+              <span class="chip" style="margin-left:auto;font-size:0.7rem">正册</span>
             </div>
             <div style="font-style:italic;color:var(--color-accent);font-size:0.85rem;
                         margin-bottom:6px;line-height:1.6">
