@@ -120,6 +120,8 @@
   function renderSidebarList(characters) {
     const list = document.getElementById('char-list');
     if (!list) return;
+    const countEl = document.getElementById('char-count');
+    if (countEl) countEl.textContent = characters ? characters.length : 0;
 
     if (!characters || characters.length === 0) {
       list.innerHTML = `
@@ -605,21 +607,6 @@
       });
     }
 
-    // Bind family filter buttons
-    document.querySelectorAll('.family-chip[data-family]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.family-chip[data-family]').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        activeFamily = btn.dataset.family;
-        const term = searchInput ? searchInput.value : '';
-        filterCharacters(term, activeFamily);
-        // Sync graph family filter
-        if (graphInited && window.GraphModule) {
-          window.GraphModule.filter(activeFamily === 'all' ? null : activeFamily);
-        }
-      });
-    });
-
     // Bind close detail panel button
     const closeBtn = document.querySelector('#detail-panel .panel-close');
     if (closeBtn) closeBtn.addEventListener('click', closeDetailPanel);
@@ -636,6 +623,32 @@
     if (btnReset)   btnReset.addEventListener('click',   () => { if (graphInited && window.GraphModule) window.GraphModule.reset(); });
     if (btnZoomIn)  btnZoomIn.addEventListener('click',  () => zoomGraph(1.3));
     if (btnZoomOut) btnZoomOut.addEventListener('click', () => zoomGraph(1 / 1.3));
+
+    // Render family filter buttons
+    const filterContainer = document.getElementById('family-filter-buttons');
+    if (filterContainer) {
+      let html = '<button class="family-chip active" data-family="all" style="background:#555;border-color:#888">全部</button>';
+      Object.entries(FAMILIES).forEach(([fid, fam]) => {
+        html += `<button class="family-chip" data-family="${esc(fid)}"
+          style="background:${esc(fam.color)}22;border-color:${esc(fam.color)};color:${esc(fam.color)}">${esc(fam.name)}</button>`;
+      });
+      filterContainer.innerHTML = html;
+    }
+
+    // Bind family filter buttons (after rendering them)
+    document.querySelectorAll('.family-chip[data-family]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.family-chip[data-family]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFamily = btn.dataset.family;
+        const searchInput = document.getElementById('char-search');
+        const term = searchInput ? searchInput.value : '';
+        filterCharacters(term, activeFamily);
+        if (graphInited && window.GraphModule) {
+          window.GraphModule.filter(activeFamily === 'all' ? null : activeFamily);
+        }
+      });
+    });
 
     // Initial renders
     renderSidebarList(Object.values(CHARACTERS));
